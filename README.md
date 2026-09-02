@@ -12,15 +12,26 @@
 
 ---
 
+## 🎥 App Demo Video
+
+<div align="center">
+  <video src="docs/video/demo_video.mp4" controls="controls" width="360" style="max-height: 720px; border-radius: 16px;">
+    Your browser does not support the video tag.
+  </video>
+  <p>📹 <em>Direct Video Link:</em> <a href="docs/video/demo_video.mp4"><strong>Watch demo_video.mp4</strong></a></p>
+</div>
+
+---
+
 ## 📸 Screen Gallery
 
-| 1. Home - Garages List | 2. Search, Filter & Sort | 3. Loading State | 4. Error & Retry (Simulated) |
-|:---:|:---:|:---:|:---:|
-| <img src="docs/screenshots/01-home-list.png" width="220" /> | <img src="docs/screenshots/02-home-search-filter-sort.png" width="220" /> | <img src="docs/screenshots/03-loading.png" width="220" /> | <img src="docs/screenshots/04-home-error-retry.png" width="220" /> |
+| 1. Home Screen | 2. Garage Details | 3. Request Service Form |
+|:---:|:---:|:---:|
+| <img src="docs/screenshots/1.jpeg" width="240" /> | <img src="docs/screenshots/2.jpeg" width="240" /> | <img src="docs/screenshots/3.jpeg" width="240" /> |
 
-| 5. Garage Details & Hours | 6. Validation Errors | 7. Completed Request Form | 8. Service Confirmation |
-|:---:|:---:|:---:|:---:|
-| <img src="docs/screenshots/05-detail.png" width="220" /> | <img src="docs/screenshots/06-request-validation-errors.png" width="220" /> | <img src="docs/screenshots/07-request-form-filled.png" width="220" /> | <img src="docs/screenshots/08-confirmation.png" width="220" /> |
+| 4. Booking Confirmed | 5. Search & Filters | 6. Dark Mode Preview |
+|:---:|:---:|:---:|
+| <img src="docs/screenshots/4.jpeg" width="240" /> | <img src="docs/screenshots/5.jpeg" width="240" /> | <img src="docs/screenshots/6.jpeg" width="240" /> |
 
 ---
 
