@@ -151,12 +151,10 @@ class MockDataFixtureTest {
     }
 
     @Test
-    fun `the payload carries no image urls`() {
-        // Deliberate: photos are the one thing the app cannot serve from assets, so the mock
-        // payload omits them and MechanicImage draws its initials tile instead. That keeps
-        // "clone and run" true with no network at all. See MechanicImage's KDoc.
+    fun `every garage carries a valid https image url`() {
         mechanics.forEach { dto ->
-            assertTrue("${dto.id}: image_url would make the demo need the network", dto.imageUrl.isBlank())
+            assertTrue("${dto.id}: image_url must not be blank", dto.imageUrl.isNotBlank())
+            assertTrue("${dto.id}: image_url must be a secure https URL", dto.imageUrl.startsWith("https://"))
         }
     }
 

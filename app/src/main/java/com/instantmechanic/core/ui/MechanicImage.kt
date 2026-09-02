@@ -20,18 +20,16 @@ import coil.compose.SubcomposeAsyncImage
 import java.util.Locale
 import kotlin.math.abs
 
+import androidx.compose.ui.platform.LocalContext
+import coil.request.ImageRequest
+
 /**
  * Garage photo, with a graceful fallback.
  *
- * Photos arrive from the API as URLs, which means they need the network even though the rest of the
- * app does not. The bundled mock payload therefore ships no `image_url` at all — so a reviewer who
- * clones this repo and runs it on a plane sees the same screen as everyone else — and this
- * composable draws a deterministic gradient derived from the garage name plus its initials:
- * stable across launches, distinct per garage, and presentable on its own rather than a broken
- * grey box.
- *
- * The Coil path is still real, not decoration: point `instantmechanic.baseUrl` at a live server
- * that returns `image_url` and the photos load with no code change.
+ * Real automotive photos load from verified CDN URLs with a smooth crossfade. If the device is
+ * offline, during loading, or if an image cannot be retrieved, this composable falls back gracefully
+ * to a deterministic gradient derived from the garage name plus its initials: stable across launches,
+ * distinct per garage, and presentable on its own rather than a broken grey box.
  */
 @Composable
 fun MechanicImage(
@@ -40,9 +38,17 @@ fun MechanicImage(
     modifier: Modifier = Modifier,
     initialsTextSize: TextUnit = 28.sp,
 ) {
+    val context = LocalContext.current
+    val imageRequest = imageUrl.takeIf { it.isNotBlank() }?.let { url ->
+        ImageRequest.Builder(context)
+            .data(url)
+            .crossfade(300)
+            .build()
+    }
+
     SubcomposeAsyncImage(
-        model = imageUrl.takeIf { it.isNotBlank() },
-        contentDescription = null,
+        model = imageRequest,
+        contentDescription = name,
         contentScale = ContentScale.Crop,
         modifier = modifier,
         loading = { InitialsPlaceholder(name, initialsTextSize) },

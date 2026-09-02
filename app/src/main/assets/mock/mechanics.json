@@ -10,19 +10,53 @@
     "city": "Pune",
     "pincode": "411038",
     "phone": "+919822014712",
-    "services": ["general_service", "engine_repair", "oil_change", "brake_repair", "ac_service"],
+    "services": [
+      "general_service",
+      "engine_repair",
+      "oil_change",
+      "brake_repair",
+      "ac_service"
+    ],
     "working_hours": [
-      { "day": "MONDAY", "opens_at": "09:00", "closes_at": "20:00" },
-      { "day": "TUESDAY", "opens_at": "09:00", "closes_at": "20:00" },
-      { "day": "WEDNESDAY", "opens_at": "09:00", "closes_at": "20:00" },
-      { "day": "THURSDAY", "opens_at": "09:00", "closes_at": "20:00" },
-      { "day": "FRIDAY", "opens_at": "09:00", "closes_at": "20:00" },
-      { "day": "SATURDAY", "opens_at": "09:00", "closes_at": "18:00" },
-      { "day": "SUNDAY", "closed": true }
+      {
+        "day": "MONDAY",
+        "opens_at": "09:00",
+        "closes_at": "20:00"
+      },
+      {
+        "day": "TUESDAY",
+        "opens_at": "09:00",
+        "closes_at": "20:00"
+      },
+      {
+        "day": "WEDNESDAY",
+        "opens_at": "09:00",
+        "closes_at": "20:00"
+      },
+      {
+        "day": "THURSDAY",
+        "opens_at": "09:00",
+        "closes_at": "20:00"
+      },
+      {
+        "day": "FRIDAY",
+        "opens_at": "09:00",
+        "closes_at": "20:00"
+      },
+      {
+        "day": "SATURDAY",
+        "opens_at": "09:00",
+        "closes_at": "18:00"
+      },
+      {
+        "day": "SUNDAY",
+        "closed": true
+      }
     ],
     "is_verified": true,
     "price_range": "₹₹",
-    "about": "Family-run garage serving Kothrud since 1998. Specialists in engine diagnostics and periodic servicing for petrol and diesel hatchbacks."
+    "about": "Family-run garage serving Kothrud since 1998. Specialists in engine diagnostics and periodic servicing for petrol and diesel hatchbacks.",
+    "image_url": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "m-002",
@@ -35,19 +69,54 @@
     "city": "Pune",
     "pincode": "411045",
     "phone": "+919011238845",
-    "services": ["general_service", "tyre_replacement", "battery_jumpstart", "car_wash", "oil_change"],
+    "services": [
+      "general_service",
+      "tyre_replacement",
+      "battery_jumpstart",
+      "car_wash",
+      "oil_change"
+    ],
     "working_hours": [
-      { "day": "MONDAY", "opens_at": "08:30", "closes_at": "21:00" },
-      { "day": "TUESDAY", "opens_at": "08:30", "closes_at": "21:00" },
-      { "day": "WEDNESDAY", "opens_at": "08:30", "closes_at": "21:00" },
-      { "day": "THURSDAY", "opens_at": "08:30", "closes_at": "21:00" },
-      { "day": "FRIDAY", "opens_at": "08:30", "closes_at": "21:00" },
-      { "day": "SATURDAY", "opens_at": "08:30", "closes_at": "21:00" },
-      { "day": "SUNDAY", "opens_at": "10:00", "closes_at": "16:00" }
+      {
+        "day": "MONDAY",
+        "opens_at": "08:30",
+        "closes_at": "21:00"
+      },
+      {
+        "day": "TUESDAY",
+        "opens_at": "08:30",
+        "closes_at": "21:00"
+      },
+      {
+        "day": "WEDNESDAY",
+        "opens_at": "08:30",
+        "closes_at": "21:00"
+      },
+      {
+        "day": "THURSDAY",
+        "opens_at": "08:30",
+        "closes_at": "21:00"
+      },
+      {
+        "day": "FRIDAY",
+        "opens_at": "08:30",
+        "closes_at": "21:00"
+      },
+      {
+        "day": "SATURDAY",
+        "opens_at": "08:30",
+        "closes_at": "21:00"
+      },
+      {
+        "day": "SUNDAY",
+        "opens_at": "10:00",
+        "closes_at": "16:00"
+      }
     ],
     "is_verified": true,
     "price_range": "₹₹",
-    "about": "Quick-turnaround workshop with same-day tyre fitting and battery replacement. Free pickup within 5 km."
+    "about": "Quick-turnaround workshop with same-day tyre fitting and battery replacement. Free pickup within 5 km.",
+    "image_url": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "m-003",
@@ -60,19 +129,52 @@
     "city": "Pune",
     "pincode": "411014",
     "phone": "+918806645521",
-    "services": ["towing", "battery_jumpstart", "tyre_replacement"],
+    "services": [
+      "towing",
+      "battery_jumpstart",
+      "tyre_replacement"
+    ],
     "working_hours": [
-      { "day": "MONDAY", "opens_at": "18:00", "closes_at": "06:00" },
-      { "day": "TUESDAY", "opens_at": "18:00", "closes_at": "06:00" },
-      { "day": "WEDNESDAY", "opens_at": "18:00", "closes_at": "06:00" },
-      { "day": "THURSDAY", "opens_at": "18:00", "closes_at": "06:00" },
-      { "day": "FRIDAY", "opens_at": "18:00", "closes_at": "06:00" },
-      { "day": "SATURDAY", "opens_at": "18:00", "closes_at": "06:00" },
-      { "day": "SUNDAY", "opens_at": "18:00", "closes_at": "06:00" }
+      {
+        "day": "MONDAY",
+        "opens_at": "18:00",
+        "closes_at": "06:00"
+      },
+      {
+        "day": "TUESDAY",
+        "opens_at": "18:00",
+        "closes_at": "06:00"
+      },
+      {
+        "day": "WEDNESDAY",
+        "opens_at": "18:00",
+        "closes_at": "06:00"
+      },
+      {
+        "day": "THURSDAY",
+        "opens_at": "18:00",
+        "closes_at": "06:00"
+      },
+      {
+        "day": "FRIDAY",
+        "opens_at": "18:00",
+        "closes_at": "06:00"
+      },
+      {
+        "day": "SATURDAY",
+        "opens_at": "18:00",
+        "closes_at": "06:00"
+      },
+      {
+        "day": "SUNDAY",
+        "opens_at": "18:00",
+        "closes_at": "06:00"
+      }
     ],
     "is_verified": false,
     "price_range": "₹₹₹",
-    "about": "Overnight roadside assistance and flatbed towing across east Pune. Operates from 6 PM to 6 AM, every night of the week."
+    "about": "Overnight roadside assistance and flatbed towing across east Pune. Operates from 6 PM to 6 AM, every night of the week.",
+    "image_url": "https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "m-004",
@@ -85,19 +187,54 @@
     "city": "Pune",
     "pincode": "411005",
     "phone": "+919960012388",
-    "services": ["general_service", "denting_painting", "ac_service", "car_wash", "engine_repair", "brake_repair"],
+    "services": [
+      "general_service",
+      "denting_painting",
+      "ac_service",
+      "car_wash",
+      "engine_repair",
+      "brake_repair"
+    ],
     "working_hours": [
-      { "day": "MONDAY", "opens_at": "09:00", "closes_at": "19:30" },
-      { "day": "TUESDAY", "opens_at": "09:00", "closes_at": "19:30" },
-      { "day": "WEDNESDAY", "opens_at": "09:00", "closes_at": "19:30" },
-      { "day": "THURSDAY", "opens_at": "09:00", "closes_at": "19:30" },
-      { "day": "FRIDAY", "opens_at": "09:00", "closes_at": "19:30" },
-      { "day": "SATURDAY", "opens_at": "09:00", "closes_at": "19:30" },
-      { "day": "SUNDAY", "closed": true }
+      {
+        "day": "MONDAY",
+        "opens_at": "09:00",
+        "closes_at": "19:30"
+      },
+      {
+        "day": "TUESDAY",
+        "opens_at": "09:00",
+        "closes_at": "19:30"
+      },
+      {
+        "day": "WEDNESDAY",
+        "opens_at": "09:00",
+        "closes_at": "19:30"
+      },
+      {
+        "day": "THURSDAY",
+        "opens_at": "09:00",
+        "closes_at": "19:30"
+      },
+      {
+        "day": "FRIDAY",
+        "opens_at": "09:00",
+        "closes_at": "19:30"
+      },
+      {
+        "day": "SATURDAY",
+        "opens_at": "09:00",
+        "closes_at": "19:30"
+      },
+      {
+        "day": "SUNDAY",
+        "closed": true
+      }
     ],
     "is_verified": true,
     "price_range": "₹₹₹",
-    "about": "Premium multi-brand service centre with an in-house paint booth and computerised wheel alignment. Highest rated garage in central Pune."
+    "about": "Premium multi-brand service centre with an in-house paint booth and computerised wheel alignment. Highest rated garage in central Pune.",
+    "image_url": "https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "m-005",
@@ -110,19 +247,52 @@
     "city": "Pune",
     "pincode": "411028",
     "phone": "+919763321104",
-    "services": ["engine_repair", "brake_repair", "general_service", "oil_change"],
+    "services": [
+      "engine_repair",
+      "brake_repair",
+      "general_service",
+      "oil_change"
+    ],
     "working_hours": [
-      { "day": "MONDAY", "opens_at": "10:00", "closes_at": "19:00" },
-      { "day": "TUESDAY", "opens_at": "10:00", "closes_at": "19:00" },
-      { "day": "WEDNESDAY", "opens_at": "10:00", "closes_at": "19:00" },
-      { "day": "THURSDAY", "opens_at": "10:00", "closes_at": "19:00" },
-      { "day": "FRIDAY", "closed": true },
-      { "day": "SATURDAY", "opens_at": "10:00", "closes_at": "19:00" },
-      { "day": "SUNDAY", "opens_at": "11:00", "closes_at": "15:00" }
+      {
+        "day": "MONDAY",
+        "opens_at": "10:00",
+        "closes_at": "19:00"
+      },
+      {
+        "day": "TUESDAY",
+        "opens_at": "10:00",
+        "closes_at": "19:00"
+      },
+      {
+        "day": "WEDNESDAY",
+        "opens_at": "10:00",
+        "closes_at": "19:00"
+      },
+      {
+        "day": "THURSDAY",
+        "opens_at": "10:00",
+        "closes_at": "19:00"
+      },
+      {
+        "day": "FRIDAY",
+        "closed": true
+      },
+      {
+        "day": "SATURDAY",
+        "opens_at": "10:00",
+        "closes_at": "19:00"
+      },
+      {
+        "day": "SUNDAY",
+        "opens_at": "11:00",
+        "closes_at": "15:00"
+      }
     ],
     "is_verified": false,
     "price_range": "₹",
-    "about": "Budget-friendly neighbourhood garage known for honest diagnostics on older commercial vehicles. Closed on Fridays."
+    "about": "Budget-friendly neighbourhood garage known for honest diagnostics on older commercial vehicles. Closed on Fridays.",
+    "image_url": "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "m-006",
@@ -135,19 +305,54 @@
     "city": "Pune",
     "pincode": "411007",
     "phone": "+919028774510",
-    "services": ["general_service", "ac_service", "oil_change", "car_wash", "battery_jumpstart"],
+    "services": [
+      "general_service",
+      "ac_service",
+      "oil_change",
+      "car_wash",
+      "battery_jumpstart"
+    ],
     "working_hours": [
-      { "day": "MONDAY", "opens_at": "08:00", "closes_at": "20:00" },
-      { "day": "TUESDAY", "opens_at": "08:00", "closes_at": "20:00" },
-      { "day": "WEDNESDAY", "opens_at": "08:00", "closes_at": "20:00" },
-      { "day": "THURSDAY", "opens_at": "08:00", "closes_at": "20:00" },
-      { "day": "FRIDAY", "opens_at": "08:00", "closes_at": "20:00" },
-      { "day": "SATURDAY", "opens_at": "08:00", "closes_at": "20:00" },
-      { "day": "SUNDAY", "opens_at": "09:00", "closes_at": "14:00" }
+      {
+        "day": "MONDAY",
+        "opens_at": "08:00",
+        "closes_at": "20:00"
+      },
+      {
+        "day": "TUESDAY",
+        "opens_at": "08:00",
+        "closes_at": "20:00"
+      },
+      {
+        "day": "WEDNESDAY",
+        "opens_at": "08:00",
+        "closes_at": "20:00"
+      },
+      {
+        "day": "THURSDAY",
+        "opens_at": "08:00",
+        "closes_at": "20:00"
+      },
+      {
+        "day": "FRIDAY",
+        "opens_at": "08:00",
+        "closes_at": "20:00"
+      },
+      {
+        "day": "SATURDAY",
+        "opens_at": "08:00",
+        "closes_at": "20:00"
+      },
+      {
+        "day": "SUNDAY",
+        "opens_at": "09:00",
+        "closes_at": "14:00"
+      }
     ],
     "is_verified": true,
     "price_range": "₹₹",
-    "about": "Transparent, app-tracked servicing with live job-card updates and digital invoices. Popular with first-time car owners."
+    "about": "Transparent, app-tracked servicing with live job-card updates and digital invoices. Popular with first-time car owners.",
+    "image_url": "https://images.unsplash.com/photo-1625047509168-a7026f36de04?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "m-007",
@@ -160,19 +365,51 @@
     "city": "Pune",
     "pincode": "411014",
     "phone": "+919145008827",
-    "services": ["tyre_replacement", "brake_repair", "general_service"],
+    "services": [
+      "tyre_replacement",
+      "brake_repair",
+      "general_service"
+    ],
     "working_hours": [
-      { "day": "MONDAY", "opens_at": "09:30", "closes_at": "20:30" },
-      { "day": "TUESDAY", "opens_at": "09:30", "closes_at": "20:30" },
-      { "day": "WEDNESDAY", "opens_at": "09:30", "closes_at": "20:30" },
-      { "day": "THURSDAY", "opens_at": "09:30", "closes_at": "20:30" },
-      { "day": "FRIDAY", "opens_at": "09:30", "closes_at": "20:30" },
-      { "day": "SATURDAY", "opens_at": "09:30", "closes_at": "20:30" },
-      { "day": "SUNDAY", "closed": true }
+      {
+        "day": "MONDAY",
+        "opens_at": "09:30",
+        "closes_at": "20:30"
+      },
+      {
+        "day": "TUESDAY",
+        "opens_at": "09:30",
+        "closes_at": "20:30"
+      },
+      {
+        "day": "WEDNESDAY",
+        "opens_at": "09:30",
+        "closes_at": "20:30"
+      },
+      {
+        "day": "THURSDAY",
+        "opens_at": "09:30",
+        "closes_at": "20:30"
+      },
+      {
+        "day": "FRIDAY",
+        "opens_at": "09:30",
+        "closes_at": "20:30"
+      },
+      {
+        "day": "SATURDAY",
+        "opens_at": "09:30",
+        "closes_at": "20:30"
+      },
+      {
+        "day": "SUNDAY",
+        "closed": true
+      }
     ],
     "is_verified": false,
     "price_range": "₹₹",
-    "about": "Tyre specialists stocking all major Indian and imported brands, with nitrogen filling and on-site balancing."
+    "about": "Tyre specialists stocking all major Indian and imported brands, with nitrogen filling and on-site balancing.",
+    "image_url": "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "m-008",
@@ -185,19 +422,52 @@
     "city": "Pune",
     "pincode": "411057",
     "phone": "+918390112267",
-    "services": ["oil_change", "general_service", "car_wash"],
+    "services": [
+      "oil_change",
+      "general_service",
+      "car_wash"
+    ],
     "working_hours": [
-      { "day": "MONDAY", "opens_at": "07:30", "closes_at": "22:00" },
-      { "day": "TUESDAY", "opens_at": "07:30", "closes_at": "22:00" },
-      { "day": "WEDNESDAY", "opens_at": "07:30", "closes_at": "22:00" },
-      { "day": "THURSDAY", "opens_at": "07:30", "closes_at": "22:00" },
-      { "day": "FRIDAY", "opens_at": "07:30", "closes_at": "22:00" },
-      { "day": "SATURDAY", "opens_at": "07:30", "closes_at": "22:00" },
-      { "day": "SUNDAY", "opens_at": "07:30", "closes_at": "22:00" }
+      {
+        "day": "MONDAY",
+        "opens_at": "07:30",
+        "closes_at": "22:00"
+      },
+      {
+        "day": "TUESDAY",
+        "opens_at": "07:30",
+        "closes_at": "22:00"
+      },
+      {
+        "day": "WEDNESDAY",
+        "opens_at": "07:30",
+        "closes_at": "22:00"
+      },
+      {
+        "day": "THURSDAY",
+        "opens_at": "07:30",
+        "closes_at": "22:00"
+      },
+      {
+        "day": "FRIDAY",
+        "opens_at": "07:30",
+        "closes_at": "22:00"
+      },
+      {
+        "day": "SATURDAY",
+        "opens_at": "07:30",
+        "closes_at": "22:00"
+      },
+      {
+        "day": "SUNDAY",
+        "opens_at": "07:30",
+        "closes_at": "22:00"
+      }
     ],
     "is_verified": true,
     "price_range": "₹",
-    "about": "Fifteen-minute oil and filter changes built around the IT park commute. Open early and late, seven days a week."
+    "about": "Fifteen-minute oil and filter changes built around the IT park commute. Open early and late, seven days a week.",
+    "image_url": "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "m-009",
@@ -210,19 +480,52 @@
     "city": "Pune",
     "pincode": "411057",
     "phone": "+919922556613",
-    "services": ["denting_painting", "general_service", "brake_repair", "engine_repair"],
+    "services": [
+      "denting_painting",
+      "general_service",
+      "brake_repair",
+      "engine_repair"
+    ],
     "working_hours": [
-      { "day": "MONDAY", "opens_at": "09:00", "closes_at": "19:00" },
-      { "day": "TUESDAY", "opens_at": "09:00", "closes_at": "19:00" },
-      { "day": "WEDNESDAY", "opens_at": "09:00", "closes_at": "19:00" },
-      { "day": "THURSDAY", "opens_at": "09:00", "closes_at": "19:00" },
-      { "day": "FRIDAY", "opens_at": "09:00", "closes_at": "19:00" },
-      { "day": "SATURDAY", "opens_at": "09:00", "closes_at": "17:00" },
-      { "day": "SUNDAY", "closed": true }
+      {
+        "day": "MONDAY",
+        "opens_at": "09:00",
+        "closes_at": "19:00"
+      },
+      {
+        "day": "TUESDAY",
+        "opens_at": "09:00",
+        "closes_at": "19:00"
+      },
+      {
+        "day": "WEDNESDAY",
+        "opens_at": "09:00",
+        "closes_at": "19:00"
+      },
+      {
+        "day": "THURSDAY",
+        "opens_at": "09:00",
+        "closes_at": "19:00"
+      },
+      {
+        "day": "FRIDAY",
+        "opens_at": "09:00",
+        "closes_at": "19:00"
+      },
+      {
+        "day": "SATURDAY",
+        "opens_at": "09:00",
+        "closes_at": "17:00"
+      },
+      {
+        "day": "SUNDAY",
+        "closed": true
+      }
     ],
     "is_verified": true,
     "price_range": "₹₹₹",
-    "about": "Insurance-approved accident repair and full-body respray. Cashless claims handled for most major insurers."
+    "about": "Insurance-approved accident repair and full-body respray. Cashless claims handled for most major insurers.",
+    "image_url": "https://images.unsplash.com/photo-1613214149922-f1809c99b414?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "m-010",
@@ -235,19 +538,51 @@
     "city": "Pune",
     "pincode": "411001",
     "phone": "+919850447729",
-    "services": ["ac_service", "battery_jumpstart", "general_service"],
+    "services": [
+      "ac_service",
+      "battery_jumpstart",
+      "general_service"
+    ],
     "working_hours": [
-      { "day": "MONDAY", "opens_at": "10:00", "closes_at": "19:00" },
-      { "day": "TUESDAY", "opens_at": "10:00", "closes_at": "19:00" },
-      { "day": "WEDNESDAY", "opens_at": "10:00", "closes_at": "19:00" },
-      { "day": "THURSDAY", "opens_at": "10:00", "closes_at": "19:00" },
-      { "day": "FRIDAY", "opens_at": "10:00", "closes_at": "19:00" },
-      { "day": "SATURDAY", "opens_at": "10:00", "closes_at": "19:00" },
-      { "day": "SUNDAY", "closed": true }
+      {
+        "day": "MONDAY",
+        "opens_at": "10:00",
+        "closes_at": "19:00"
+      },
+      {
+        "day": "TUESDAY",
+        "opens_at": "10:00",
+        "closes_at": "19:00"
+      },
+      {
+        "day": "WEDNESDAY",
+        "opens_at": "10:00",
+        "closes_at": "19:00"
+      },
+      {
+        "day": "THURSDAY",
+        "opens_at": "10:00",
+        "closes_at": "19:00"
+      },
+      {
+        "day": "FRIDAY",
+        "opens_at": "10:00",
+        "closes_at": "19:00"
+      },
+      {
+        "day": "SATURDAY",
+        "opens_at": "10:00",
+        "closes_at": "19:00"
+      },
+      {
+        "day": "SUNDAY",
+        "closed": true
+      }
     ],
     "is_verified": false,
     "price_range": "₹₹",
-    "about": "Air-conditioning specialists — compressor rebuilds, gas top-ups and cabin filter replacement while you wait."
+    "about": "Air-conditioning specialists — compressor rebuilds, gas top-ups and cabin filter replacement while you wait.",
+    "image_url": "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "m-011",
@@ -260,19 +595,51 @@
     "city": "Pune",
     "pincode": "411001",
     "phone": "+919673310098",
-    "services": ["car_wash", "denting_painting", "general_service"],
+    "services": [
+      "car_wash",
+      "denting_painting",
+      "general_service"
+    ],
     "working_hours": [
-      { "day": "MONDAY", "closed": true },
-      { "day": "TUESDAY", "opens_at": "10:00", "closes_at": "20:00" },
-      { "day": "WEDNESDAY", "opens_at": "10:00", "closes_at": "20:00" },
-      { "day": "THURSDAY", "opens_at": "10:00", "closes_at": "20:00" },
-      { "day": "FRIDAY", "opens_at": "10:00", "closes_at": "20:00" },
-      { "day": "SATURDAY", "opens_at": "09:00", "closes_at": "21:00" },
-      { "day": "SUNDAY", "opens_at": "09:00", "closes_at": "21:00" }
+      {
+        "day": "MONDAY",
+        "closed": true
+      },
+      {
+        "day": "TUESDAY",
+        "opens_at": "10:00",
+        "closes_at": "20:00"
+      },
+      {
+        "day": "WEDNESDAY",
+        "opens_at": "10:00",
+        "closes_at": "20:00"
+      },
+      {
+        "day": "THURSDAY",
+        "opens_at": "10:00",
+        "closes_at": "20:00"
+      },
+      {
+        "day": "FRIDAY",
+        "opens_at": "10:00",
+        "closes_at": "20:00"
+      },
+      {
+        "day": "SATURDAY",
+        "opens_at": "09:00",
+        "closes_at": "21:00"
+      },
+      {
+        "day": "SUNDAY",
+        "opens_at": "09:00",
+        "closes_at": "21:00"
+      }
     ],
     "is_verified": true,
     "price_range": "₹₹₹",
-    "about": "Ceramic coating, paint correction and interior deep-cleaning for premium cars. Appointment only; closed Mondays."
+    "about": "Ceramic coating, paint correction and interior deep-cleaning for premium cars. Appointment only; closed Mondays.",
+    "image_url": "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": "m-012",
@@ -285,18 +652,52 @@
     "city": "Pune",
     "pincode": "411058",
     "phone": "+918788220945",
-    "services": ["towing", "battery_jumpstart", "tyre_replacement", "brake_repair"],
+    "services": [
+      "towing",
+      "battery_jumpstart",
+      "tyre_replacement",
+      "brake_repair"
+    ],
     "working_hours": [
-      { "day": "MONDAY", "opens_at": "00:00", "closes_at": "23:59" },
-      { "day": "TUESDAY", "opens_at": "00:00", "closes_at": "23:59" },
-      { "day": "WEDNESDAY", "opens_at": "00:00", "closes_at": "23:59" },
-      { "day": "THURSDAY", "opens_at": "00:00", "closes_at": "23:59" },
-      { "day": "FRIDAY", "opens_at": "00:00", "closes_at": "23:59" },
-      { "day": "SATURDAY", "opens_at": "00:00", "closes_at": "23:59" },
-      { "day": "SUNDAY", "opens_at": "00:00", "closes_at": "23:59" }
+      {
+        "day": "MONDAY",
+        "opens_at": "00:00",
+        "closes_at": "23:59"
+      },
+      {
+        "day": "TUESDAY",
+        "opens_at": "00:00",
+        "closes_at": "23:59"
+      },
+      {
+        "day": "WEDNESDAY",
+        "opens_at": "00:00",
+        "closes_at": "23:59"
+      },
+      {
+        "day": "THURSDAY",
+        "opens_at": "00:00",
+        "closes_at": "23:59"
+      },
+      {
+        "day": "FRIDAY",
+        "opens_at": "00:00",
+        "closes_at": "23:59"
+      },
+      {
+        "day": "SATURDAY",
+        "opens_at": "00:00",
+        "closes_at": "23:59"
+      },
+      {
+        "day": "SUNDAY",
+        "opens_at": "00:00",
+        "closes_at": "23:59"
+      }
     ],
     "is_verified": false,
     "price_range": "₹",
-    "about": "Round-the-clock breakdown support on the Mumbai-Bengaluru highway stretch. Flat tyres, jump starts and short-distance towing."
+    "about": "Round-the-clock breakdown support on the Mumbai-Bengaluru highway stretch. Flat tyres, jump starts and short-distance towing.",
+    "image_url": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80"
   }
 ]
