@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -414,7 +415,11 @@ private fun RequestServiceBar(onClick: () -> Unit) {
         color = MaterialTheme.colorScheme.surface,
         shadowElevation = 8.dp,
     ) {
-        Box(modifier = Modifier.padding(PaddingValues(horizontal = 16.dp, vertical = 12.dp))) {
+        Box(
+            modifier = Modifier
+                .navigationBarsPadding()
+                .padding(PaddingValues(horizontal = 16.dp, vertical = 12.dp)),
+        ) {
             Button(
                 onClick = onClick,
                 modifier = Modifier
