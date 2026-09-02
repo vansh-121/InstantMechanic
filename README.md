@@ -16,7 +16,7 @@
 
 <div align="center">
   <img src="docs/video/demo_walkthrough.gif" width="300" style="border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" alt="Instant Mechanic App Demo" />
-  <p>📹 <em>Full HD MP4 Recording:</em> <a href="docs/video/demo_video.mp4"><strong>Watch / Download demo_video.mp4</strong></a></p>
+  <!-- <p>📹 <em>Full HD MP4 Recording:</em> <a href="docs/video/demo_video.mp4"><strong>Watch / Download demo_video.mp4</strong></a></p> -->
 </div>
 
 ---
