@@ -49,6 +49,3 @@ Thumbs.db
 
 # Kotlin
 .kotlin/
-
-# Tooling scratch
-.claude/
