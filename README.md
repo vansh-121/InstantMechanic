@@ -34,11 +34,11 @@
 - **Responsive Feedback**: Shows initial full-page loading spinner on cold boot, and a slim non-blocking indicator during re-querying.
 
 ### 🏢 2. Detailed Garage Profile
-- **Hero Image & Overview**: Garage banner image with verified badges, distance, locality, and complete address.
+- **Hero Image & Overview**: High-resolution curated automotive photography tailored specifically to the garage's name and service capability, with smooth Coil crossfade transitions and gradient fallback.
 - **One-Tap Dialing**: Phone row integrated with Android `ACTION_DIAL` intent to call the garage immediately.
-- **Services Offeriings**: Structured grid displaying all services performed with dedicated badges.
+- **Services Offerings**: Structured grid displaying all services performed with dedicated badges.
 - **Weekly Schedule**: 7-day operating hours table with **today's row automatically highlighted**.
-- **Pinned Action Bar**: Persistent CTA to initiate service booking.
+- **Pinned Action Bar**: Persistent CTA to initiate service booking, with full edge-to-edge system navigation bar safe area insets.
 
 ### 📝 3. Service Booking & Validation
 - **Smart Prefilling**: Automatically links the selected garage and pre-selects service options if single-service.
@@ -49,13 +49,16 @@
   - **Service Selection**: Mandatory service selection from available garage capabilities.
   - **Problem Description**: Minimum 10 characters, maximum 500 characters with live character counter.
 - **Interactive Validation State**: Errors are kept discreet until the user first clicks submit, after which fields dynamically clear errors as the user corrects them.
+- **Keyboard & Navigation Insets**: Wrapped in `.imePadding()` and `.navigationBarsPadding()` so the form and submit button are never covered by the on-screen keyboard or navigation bar.
 
 ### 🧾 4. Confirmation Receipt
 - Displays generated **Request ID**, selected service name, garage name, and estimated arrival/service **ETA in minutes**.
+- Full system bar insets preventing overlap with status bar or navigation buttons.
 - "Done" button returns user cleanly to the home screen.
 
-### 🛠️ 5. Developer & Interview Demo Tools
-- **Simulated Network Error Switch**: An overflow menu toggle on the Home screen forces the interceptor to return HTTP 503. This lets reviewers demo network failure and recovery/retry mechanisms **on camera without toggling airplane mode or unplugging Wi-Fi**.
+### 🌓 5. Dynamic Theme & Modern UX
+- **One-Tap Light / Dark Mode**: Dedicated top app bar action toggles between light and dark themes across the whole app, with persistent state management in `MainActivity`.
+- **Edge-to-Edge System Bar Handling**: Proper WindowInsets padding applied across all screens to ensure 3-button navigation bars and gesture handles never collide with buttons or text.
 
 ---
 
