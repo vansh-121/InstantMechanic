@@ -15,10 +15,8 @@
 ## 🎥 App Demo Video
 
 <div align="center">
-  <video src="docs/video/demo_video.mp4" controls="controls" width="360" style="max-height: 720px; border-radius: 16px;">
-    Your browser does not support the video tag.
-  </video>
-  <p>📹 <em>Direct Video Link:</em> <a href="docs/video/demo_video.mp4"><strong>Watch demo_video.mp4</strong></a></p>
+  <img src="docs/video/demo_walkthrough.gif" width="300" style="border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" alt="Instant Mechanic App Demo" />
+  <p>📹 <em>Full HD MP4 Recording:</em> <a href="docs/video/demo_video.mp4"><strong>Watch / Download demo_video.mp4</strong></a></p>
 </div>
 
 ---
