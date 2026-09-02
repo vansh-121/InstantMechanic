@@ -19,12 +19,18 @@ import com.instantmechanic.ui.request.RequestServiceRoute
  * and no state leaking between garages.
  */
 @Composable
-fun AppNavHost(navController: NavHostController = rememberNavController()) {
+fun AppNavHost(
+    navController: NavHostController = rememberNavController(),
+    isDarkTheme: Boolean = false,
+    onToggleTheme: () -> Unit = {},
+) {
     NavHost(navController = navController, startDestination = Routes.HOME) {
 
         composable(Routes.HOME) {
             HomeRoute(
                 onMechanicClick = { id -> navController.navigate(Routes.detail(id)) },
+                isDarkTheme = isDarkTheme,
+                onToggleTheme = onToggleTheme,
             )
         }
 

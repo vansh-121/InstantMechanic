@@ -18,6 +18,7 @@
     <string name="home_clear_filters">Clear filters</string>
     <string name="home_debug_menu">Developer options</string>
     <string name="home_debug_simulate_error">Simulate network error</string>
+    <string name="home_theme_toggle">Toggle light and dark mode</string>
 
     <!-- Mechanic card / shared -->
     <string name="status_open">Open now</string>

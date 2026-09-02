@@ -22,9 +22,10 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.outlined.BugReport
 import androidx.compose.material.icons.outlined.Close
+import androidx.compose.material.icons.outlined.DarkMode
 import androidx.compose.material.icons.outlined.KeyboardArrowDown
+import androidx.compose.material.icons.outlined.LightMode
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.SwapVert
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -59,7 +60,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.instantmechanic.BuildConfig
 import com.instantmechanic.R
 import com.instantmechanic.core.ui.EmptyState
 import com.instantmechanic.core.ui.ErrorState
@@ -72,6 +72,8 @@ import com.instantmechanic.ui.theme.InstantMechanicTheme
 @Composable
 fun HomeRoute(
     onMechanicClick: (String) -> Unit,
+    isDarkTheme: Boolean = false,
+    onToggleTheme: () -> Unit = {},
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -86,6 +88,8 @@ fun HomeRoute(
         onRetry = viewModel::retry,
         onToggleSimulatedFailure = viewModel::onToggleSimulatedFailure,
         onMechanicClick = onMechanicClick,
+        isDarkTheme = isDarkTheme,
+        onToggleTheme = onToggleTheme,
     )
 }
 
@@ -102,6 +106,8 @@ fun HomeScreen(
     onRetry: () -> Unit,
     onToggleSimulatedFailure: () -> Unit,
     onMechanicClick: (String) -> Unit,
+    isDarkTheme: Boolean = false,
+    onToggleTheme: () -> Unit = {},
 ) {
     Scaffold(
         topBar = {
@@ -125,7 +131,12 @@ fun HomeScreen(
                         }
                     }
                 },
-                actions = { if (showDevTools) DevToolsAction(state.simulateFailure, onToggleSimulatedFailure) },
+                actions = {
+                    ThemeToggleAction(
+                        isDarkTheme = isDarkTheme,
+                        onToggleTheme = onToggleTheme,
+                    )
+                },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface,
                 ),
@@ -377,41 +388,16 @@ private fun SelectedTick() {
     )
 }
 
-/**
- * Overflow action that forces the next request to fail, so the error state and its Retry path can
- * be demonstrated on purpose instead of by turning off wi-fi at the right moment.
- */
 @Composable
-private fun DevToolsAction(simulateFailure: Boolean, onToggle: () -> Unit) {
-    var expanded by remember { mutableStateOf(false) }
-    Box {
-        IconButton(onClick = { expanded = true }) {
-            Icon(
-                imageVector = Icons.Outlined.BugReport,
-                contentDescription = stringResource(R.string.home_debug_menu),
-                tint = if (simulateFailure) {
-                    MaterialTheme.colorScheme.error
-                } else {
-                    MaterialTheme.colorScheme.onSurfaceVariant
-                },
-            )
-        }
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            DropdownMenuItem(
-                text = { Text(stringResource(R.string.home_debug_simulate_error)) },
-                onClick = {
-                    onToggle()
-                    expanded = false
-                },
-                trailingIcon = { if (simulateFailure) SelectedTick() else Spacer(Modifier.width(18.dp)) },
-            )
-        }
+private fun ThemeToggleAction(isDarkTheme: Boolean, onToggleTheme: () -> Unit) {
+    IconButton(onClick = onToggleTheme) {
+        Icon(
+            imageVector = if (isDarkTheme) Icons.Outlined.LightMode else Icons.Outlined.DarkMode,
+            contentDescription = stringResource(R.string.home_theme_toggle),
+            tint = MaterialTheme.colorScheme.onSurface,
+        )
     }
 }
-
-/** The dev menu is meaningful only in a debug build that is actually using the mock backend. */
-private val showDevTools: Boolean
-    get() = BuildConfig.DEBUG && BuildConfig.USE_MOCK_API
 
 @Preview(showBackground = true)
 @Composable
