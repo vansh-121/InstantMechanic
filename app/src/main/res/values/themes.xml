@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      The Compose theme in ui/theme owns all in-app colour. This XML theme exists only for the
+      window background and status-bar treatment applied before the first frame is drawn, which
+      is what stops the app flashing white on launch in dark mode.
+    -->
+    <style name="Theme.InstantMechanic" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/window_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>
