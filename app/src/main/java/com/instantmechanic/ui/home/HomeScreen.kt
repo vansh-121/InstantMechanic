@@ -1,6 +1,7 @@
 package com.instantmechanic.ui.home
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -41,6 +42,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -55,10 +57,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -307,10 +311,21 @@ private fun SearchField(
         onValueChange = onValueChange,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        placeholder = { Text(stringResource(R.string.home_search_hint)) },
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .shadow(elevation = 2.dp, shape = RoundedCornerShape(28.dp)),
+        placeholder = {
+            Text(
+                text = stringResource(R.string.home_search_hint),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
+            )
+        },
         leadingIcon = {
-            Icon(imageVector = Icons.Outlined.Search, contentDescription = null)
+            Icon(
+                imageVector = Icons.Outlined.Search,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+            )
         },
         trailingIcon = {
             if (value.isNotEmpty()) {
@@ -323,7 +338,13 @@ private fun SearchField(
             }
         },
         singleLine = true,
-        shape = RoundedCornerShape(14.dp),
+        shape = RoundedCornerShape(28.dp),
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+            unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+            focusedBorderColor = MaterialTheme.colorScheme.primary,
+            unfocusedBorderColor = Color.Transparent,
+        ),
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
         keyboardActions = KeyboardActions(onSearch = { keyboard?.hide() }),
     )
@@ -349,6 +370,7 @@ private fun FilterBar(
         FilterChip(
             selected = openNowOnly,
             onClick = { onOpenNowToggled(!openNowOnly) },
+            shape = RoundedCornerShape(20.dp),
             label = { Text(stringResource(R.string.home_filter_open_now)) },
             leadingIcon = if (openNowOnly) {
                 {
@@ -378,6 +400,7 @@ private fun ServiceFilterMenu(
         FilterChip(
             selected = selected != null,
             onClick = { expanded = true },
+            shape = RoundedCornerShape(20.dp),
             label = {
                 Text(selected?.label ?: stringResource(R.string.home_filter_all_services))
             },
@@ -399,8 +422,6 @@ private fun ServiceFilterMenu(
                 trailingIcon = { if (selected == null) SelectedTick() },
             )
             HorizontalDivider()
-            // OTHER exists only as a lenient parse target for unknown server values; offering it
-            // as a filter would be meaningless to a user.
             ServiceType.entries.filter { it != ServiceType.OTHER }.forEach { service ->
                 DropdownMenuItem(
                     text = { Text(service.label) },
@@ -423,24 +444,26 @@ private fun SortMenu(
     var expanded by remember { mutableStateOf(false) }
     Box {
         Surface(
-            shape = RoundedCornerShape(10.dp),
-            color = Color.Transparent,
+            shape = RoundedCornerShape(20.dp),
+            color = MaterialTheme.colorScheme.surfaceContainerHigh,
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)),
             modifier = Modifier.clickable { expanded = true },
         ) {
             Row(
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
+                modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Icon(
                     imageVector = Icons.Outlined.SwapVert,
                     contentDescription = stringResource(R.string.home_sort_by, sort.label),
-                    modifier = Modifier.size(18.dp),
+                    modifier = Modifier.size(16.dp),
                     tint = MaterialTheme.colorScheme.primary,
                 )
                 Text(
                     text = sort.label,
-                    style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.labelMedium,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.padding(start = 4.dp),
                 )
             }

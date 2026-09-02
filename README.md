@@ -59,6 +59,7 @@
 - "Done" button returns user cleanly to the home screen.
 
 ### 🌓 5. Dynamic Theme & Modern UX
+- **Plus Jakarta Sans Typography**: Bundled modern geometric typeface across all display, title, body, and label styles for crisp, premium mobile readability.
 - **One-Tap Light / Dark Mode**: Dedicated top app bar action toggles between light and dark themes across the whole app, with persistent state management in `MainActivity`.
 - **Edge-to-Edge System Bar Handling**: Proper WindowInsets padding applied across all screens to ensure 3-button navigation bars and gesture handles never collide with buttons or text.
 

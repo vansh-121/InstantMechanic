@@ -3,8 +3,10 @@ package com.instantmechanic.ui.detail
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -22,7 +24,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
+import androidx.compose.material.icons.automirrored.outlined.ArrowForward
 import androidx.compose.material.icons.outlined.CurrencyRupee
+import androidx.compose.material.icons.outlined.Directions
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material.icons.outlined.Phone
 import androidx.compose.material3.Button
@@ -33,6 +37,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -139,6 +144,37 @@ private fun DetailContent(
     mechanic: MechanicDetail,
     snackbarHostState: SnackbarHostState,
 ) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val noDialerMessage = stringResource(R.string.detail_no_dialer)
+
+    val dial: () -> Unit = {
+        val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", mechanic.phone, null))
+        try {
+            context.startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            scope.launch { snackbarHostState.showSnackbar(noDialerMessage) }
+        }
+    }
+
+    val openDirections: () -> Unit = {
+        val gmmIntentUri = Uri.parse("geo:0,0?q=${Uri.encode(mechanic.name + ", " + mechanic.fullAddress)}")
+        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+        try {
+            context.startActivity(mapIntent)
+        } catch (e: ActivityNotFoundException) {
+            val webIntent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://www.google.com/maps/search/?api=1&query=${Uri.encode(mechanic.name + ", " + mechanic.fullAddress)}"),
+            )
+            try {
+                context.startActivity(webIntent)
+            } catch (_: ActivityNotFoundException) {
+                scope.launch { snackbarHostState.showSnackbar(mechanic.fullAddress) }
+            }
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -154,6 +190,7 @@ private fun DetailContent(
                 Text(
                     text = mechanic.name,
                     style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.weight(1f, fill = false),
                 )
@@ -171,21 +208,120 @@ private fun DetailContent(
                 OpenClosedChip(isOpen = mechanic.isOpenNow)
             }
 
-            InfoRow(
-                icon = Icons.Outlined.LocationOn,
-                primary = mechanic.fullAddress,
-                secondary = mechanic.distanceDisplay,
-            )
+            // Quick Actions: Call & Directions
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                Button(
+                    onClick = dial,
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(48.dp),
+                    shape = RoundedCornerShape(14.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Phone,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp),
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = stringResource(R.string.detail_call),
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.SemiBold,
+                    )
+                }
 
-            if (mechanic.priceRange.isNotBlank()) {
-                InfoRow(
-                    icon = Icons.Outlined.CurrencyRupee,
-                    primary = stringResource(R.string.detail_price_range),
-                    secondary = mechanic.priceRange,
-                )
+                OutlinedButton(
+                    onClick = openDirections,
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(48.dp),
+                    shape = RoundedCornerShape(14.dp),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Directions,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(18.dp),
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = "Directions",
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
             }
 
-            CallRow(phone = mechanic.phone, snackbarHostState = snackbarHostState)
+            // Location & Pricing Info Card
+            Surface(
+                shape = RoundedCornerShape(16.dp),
+                color = MaterialTheme.colorScheme.surfaceContainer,
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.45f)),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp),
+            ) {
+                Column(modifier = Modifier.padding(14.dp)) {
+                    Row(verticalAlignment = Alignment.Top) {
+                        Icon(
+                            imageVector = Icons.Outlined.LocationOn,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(20.dp),
+                        )
+                        Column(modifier = Modifier.padding(start = 10.dp)) {
+                            Text(
+                                text = mechanic.fullAddress,
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurface,
+                            )
+                            Text(
+                                text = "${mechanic.distanceDisplay} away",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.primary,
+                                fontWeight = FontWeight.Medium,
+                                modifier = Modifier.padding(top = 2.dp),
+                            )
+                        }
+                    }
+
+                    if (mechanic.priceRange.isNotBlank()) {
+                        HorizontalDivider(
+                            color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f),
+                            modifier = Modifier.padding(vertical = 10.dp),
+                        )
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = Icons.Outlined.CurrencyRupee,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.size(18.dp),
+                            )
+                            Text(
+                                text = stringResource(R.string.detail_price_range),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.padding(start = 10.dp),
+                            )
+                            Spacer(modifier = Modifier.weight(1f))
+                            Text(
+                                text = mechanic.priceRange,
+                                style = MaterialTheme.typography.labelLarge,
+                                fontWeight = FontWeight.SemiBold,
+                                color = MaterialTheme.colorScheme.onSurface,
+                            )
+                        }
+                    }
+                }
+            }
 
             if (mechanic.about.isNotBlank()) {
                 SectionHeader(stringResource(R.string.detail_about))
@@ -216,16 +352,20 @@ private fun HeaderImage(mechanic: MechanicDetail) {
             initialsTextSize = MaterialTheme.typography.headlineMedium.fontSize,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp),
+                .height(220.dp),
         )
-        // Scrim so the image never fights the content that follows it.
+        // Multi-stop scrim for contrast
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
+                .height(220.dp)
                 .background(
                     Brush.verticalGradient(
-                        colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.18f)),
+                        colors = listOf(
+                            Color.Black.copy(alpha = 0.12f),
+                            Color.Transparent,
+                            Color.Black.copy(alpha = 0.28f),
+                        ),
                     ),
                 ),
         )
@@ -237,113 +377,10 @@ private fun SectionHeader(title: String) {
     Text(
         text = title,
         style = MaterialTheme.typography.titleMedium,
+        fontWeight = FontWeight.Bold,
         color = MaterialTheme.colorScheme.onSurface,
         modifier = Modifier.padding(top = 24.dp, bottom = 10.dp),
     )
-}
-
-@Composable
-private fun InfoRow(
-    icon: ImageVector,
-    primary: String,
-    secondary: String?,
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 14.dp),
-        verticalAlignment = Alignment.Top,
-    ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.size(20.dp),
-        )
-        Column(modifier = Modifier.padding(start = 10.dp)) {
-            Text(
-                text = primary,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-            if (!secondary.isNullOrBlank()) {
-                Text(
-                    text = secondary,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            }
-        }
-    }
-}
-
-/**
- * Tappable phone row.
- *
- * Uses `ACTION_DIAL` rather than `ACTION_CALL`: dialling requires no runtime permission and it
- * leaves the user in control of whether the call is actually placed. The `ActivityNotFoundException`
- * branch matters on tablets and emulators with no dialer installed.
- */
-@Composable
-private fun CallRow(phone: String, snackbarHostState: SnackbarHostState) {
-    val context = LocalContext.current
-    val scope = rememberCoroutineScope()
-    val noDialerMessage = stringResource(R.string.detail_no_dialer)
-    val callDescription = stringResource(R.string.detail_call_content_description, phone)
-
-    val dial: () -> Unit = {
-        val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null))
-        try {
-            context.startActivity(intent)
-        } catch (e: ActivityNotFoundException) {
-            scope.launch { snackbarHostState.showSnackbar(noDialerMessage) }
-        }
-    }
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 14.dp)
-            .clip(RoundedCornerShape(10.dp))
-            .clickable(onClick = dial)
-            .padding(vertical = 4.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Icon(
-            imageVector = Icons.Outlined.Phone,
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.size(20.dp),
-        )
-        Column(
-            modifier = Modifier
-                .padding(start = 10.dp)
-                .weight(1f),
-        ) {
-            Text(
-                text = phone,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.primary,
-                fontWeight = FontWeight.SemiBold,
-            )
-            Text(
-                text = stringResource(R.string.detail_contact),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-        }
-        FilledTonalButton(onClick = dial) {
-            Icon(
-                imageVector = Icons.Outlined.Phone,
-                contentDescription = callDescription,
-                modifier = Modifier.size(16.dp),
-            )
-            Text(
-                text = stringResource(R.string.detail_call),
-                modifier = Modifier.padding(start = 6.dp),
-            )
-        }
-    }
 }
 
 /** Weekly hours with today's row called out, so "am I too late?" is answerable at a glance. */
@@ -351,8 +388,9 @@ private fun CallRow(phone: String, snackbarHostState: SnackbarHostState) {
 private fun WorkingHoursTable(hours: List<DayHours>) {
     val today = remember { LocalDate.now().dayOfWeek }
     Surface(
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(16.dp),
         color = MaterialTheme.colorScheme.surfaceContainer,
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.45f)),
         modifier = Modifier.fillMaxWidth(),
     ) {
         Column(modifier = Modifier.padding(vertical = 4.dp)) {
@@ -363,7 +401,7 @@ private fun WorkingHoursTable(hours: List<DayHours>) {
                         .fillMaxWidth()
                         .background(
                             if (isToday) {
-                                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.45f)
+                                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
                             } else {
                                 Color.Transparent
                             },
@@ -379,12 +417,19 @@ private fun WorkingHoursTable(hours: List<DayHours>) {
                         modifier = Modifier.width(48.dp),
                     )
                     if (isToday) {
-                        Text(
-                            text = stringResource(R.string.detail_today),
-                            style = MaterialTheme.typography.labelSmall,
+                        Surface(
+                            shape = RoundedCornerShape(6.dp),
                             color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.padding(end = 8.dp),
-                        )
+                        ) {
+                            Text(
+                                text = stringResource(R.string.detail_today),
+                                style = MaterialTheme.typography.labelSmall,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onPrimary,
+                                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                            )
+                        }
                     }
                     Spacer(modifier = Modifier.weight(1f))
                     Text(
@@ -400,7 +445,7 @@ private fun WorkingHoursTable(hours: List<DayHours>) {
                 }
                 if (index != hours.lastIndex) {
                     HorizontalDivider(
-                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f),
+                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
                         modifier = Modifier.padding(horizontal = 14.dp),
                     )
                 }
@@ -424,13 +469,22 @@ private fun RequestServiceBar(onClick: () -> Unit) {
                 onClick = onClick,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(52.dp),
-                shape = RoundedCornerShape(14.dp),
-                colors = ButtonDefaults.buttonColors(),
+                    .height(54.dp),
+                shape = RoundedCornerShape(16.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+                elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp),
             ) {
                 Text(
                     text = stringResource(R.string.detail_request_service),
                     style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                )
+                Icon(
+                    imageVector = Icons.AutoMirrored.Outlined.ArrowForward,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(start = 8.dp)
+                        .size(20.dp),
                 )
             }
         }

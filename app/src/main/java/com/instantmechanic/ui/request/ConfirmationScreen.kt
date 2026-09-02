@@ -1,5 +1,6 @@
 package com.instantmechanic.ui.request
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -87,12 +89,14 @@ fun ConfirmationScreen(
                 onClick = onDone,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(52.dp),
-                shape = RoundedCornerShape(14.dp),
+                    .height(54.dp),
+                shape = RoundedCornerShape(16.dp),
+                elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp),
             ) {
                 Text(
                     text = stringResource(R.string.confirmation_done),
                     style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
                 )
             }
         }
@@ -103,30 +107,42 @@ fun ConfirmationScreen(
 private fun SuccessMark() {
     val status = LocalStatusColors.current
     Box(
-        modifier = Modifier
-            .size(76.dp),
+        modifier = Modifier.size(92.dp),
         contentAlignment = Alignment.Center,
     ) {
-        Surface(shape = CircleShape, color = status.open, modifier = Modifier.fillMaxSize()) {}
-        Icon(
-            imageVector = Icons.Outlined.Check,
-            contentDescription = null,
-            tint = status.onOpen,
-            modifier = Modifier.size(40.dp),
-        )
+        Surface(
+            shape = CircleShape,
+            color = status.open.copy(alpha = 0.35f),
+            modifier = Modifier.size(92.dp),
+        ) {}
+        Surface(
+            shape = CircleShape,
+            color = status.open,
+            modifier = Modifier.size(68.dp),
+        ) {
+            Box(contentAlignment = Alignment.Center) {
+                Icon(
+                    imageVector = Icons.Outlined.Check,
+                    contentDescription = null,
+                    tint = status.onOpen,
+                    modifier = Modifier.size(36.dp),
+                )
+            }
+        }
     }
 }
 
 @Composable
 private fun ReceiptCard(receipt: ServiceRequestReceipt) {
     Surface(
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(20.dp),
         color = MaterialTheme.colorScheme.surfaceContainer,
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)),
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 28.dp),
     ) {
-        Column(modifier = Modifier.padding(vertical = 4.dp)) {
+        Column(modifier = Modifier.padding(vertical = 6.dp)) {
             ReceiptRow(
                 label = stringResource(R.string.confirmation_request_id),
                 value = receipt.requestId,

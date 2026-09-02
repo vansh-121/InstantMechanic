@@ -1,5 +1,6 @@
 package com.instantmechanic.ui.home
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,26 +46,47 @@ fun MechanicCard(
     Card(
         onClick = onClick,
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainer,
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp, pressedElevation = 5.dp),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.45f)),
     ) {
         Row(modifier = Modifier.padding(12.dp)) {
-            MechanicImage(
-                imageUrl = mechanic.imageUrl,
-                name = mechanic.name,
-                initialsTextSize = MaterialTheme.typography.titleMedium.fontSize,
+            Box(
                 modifier = Modifier
-                    .size(84.dp)
-                    .clip(RoundedCornerShape(12.dp)),
-            )
-            Column(modifier = Modifier.padding(start = 12.dp)) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                    .size(104.dp)
+                    .clip(RoundedCornerShape(16.dp)),
+            ) {
+                MechanicImage(
+                    imageUrl = mechanic.imageUrl,
+                    name = mechanic.name,
+                    initialsTextSize = MaterialTheme.typography.titleLarge.fontSize,
+                    modifier = Modifier.matchParentSize(),
+                )
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .padding(5.dp),
+                ) {
+                    OpenClosedChip(isOpen = mechanic.isOpenNow)
+                }
+            }
+
+            Column(
+                modifier = Modifier
+                    .padding(start = 12.dp)
+                    .weight(1f),
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
                     Text(
                         text = mechanic.name,
                         style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onSurface,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
@@ -79,8 +102,6 @@ fun MechanicCard(
                     modifier = Modifier.padding(top = 4.dp),
                 ) {
                     RatingRow(rating = mechanic.rating, reviewCount = mechanic.reviewCount)
-                    Spacer(modifier = Modifier.width(10.dp))
-                    OpenClosedChip(isOpen = mechanic.isOpenNow)
                 }
 
                 Row(
@@ -90,16 +111,17 @@ fun MechanicCard(
                     Icon(
                         imageVector = Icons.Outlined.LocationOn,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(14.dp),
                     )
                     Text(
                         text = "${mechanic.distanceDisplay} · ${mechanic.areaDisplay}",
                         style = MaterialTheme.typography.bodySmall,
+                        fontWeight = FontWeight.Medium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.padding(start = 3.dp),
+                        modifier = Modifier.padding(start = 4.dp),
                     )
                 }
 

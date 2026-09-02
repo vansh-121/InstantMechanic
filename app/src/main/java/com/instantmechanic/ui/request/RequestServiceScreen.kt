@@ -1,5 +1,6 @@
 package com.instantmechanic.ui.request
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -20,8 +21,15 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
+import androidx.compose.material.icons.automirrored.outlined.ArrowForward
 import androidx.compose.material.icons.outlined.ArrowDropDown
+import androidx.compose.material.icons.outlined.Build
+import androidx.compose.material.icons.outlined.DirectionsCar
+import androidx.compose.material.icons.outlined.EditNote
+import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Phone
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -33,9 +41,11 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -184,11 +194,59 @@ private fun RequestForm(
             .padding(horizontal = 16.dp, vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
+        // Garage Header Card
+        Surface(
+            shape = RoundedCornerShape(16.dp),
+            color = MaterialTheme.colorScheme.surfaceContainer,
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.45f)),
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Row(
+                modifier = Modifier.padding(14.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Surface(
+                    shape = RoundedCornerShape(12.dp),
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    modifier = Modifier.size(44.dp),
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = Icons.Outlined.Build,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.size(22.dp),
+                        )
+                    }
+                }
+                Column(modifier = Modifier.padding(start = 12.dp)) {
+                    Text(
+                        text = state.mechanicName,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface,
+                    )
+                    Text(
+                        text = "Booking verified on-demand service",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            }
+        }
+
         LabeledTextField(
             value = state.input.customerName,
             onValueChange = onNameChange,
             label = stringResource(R.string.request_field_name),
             errorText = state.errorFor(FormField.NAME)?.message(),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Outlined.Person,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                )
+            },
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Words,
                 imeAction = ImeAction.Next,
@@ -201,6 +259,13 @@ private fun RequestForm(
             label = stringResource(R.string.request_field_phone),
             errorText = state.errorFor(FormField.PHONE)?.message(),
             prefix = { Text(stringResource(R.string.request_field_phone_prefix)) },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Outlined.Phone,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                )
+            },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Phone,
                 imeAction = ImeAction.Next,
@@ -213,6 +278,13 @@ private fun RequestForm(
             label = stringResource(R.string.request_field_vehicle),
             placeholder = stringResource(R.string.request_field_vehicle_hint),
             errorText = state.errorFor(FormField.VEHICLE_NUMBER)?.message(),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Outlined.DirectionsCar,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                )
+            },
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Characters,
                 imeAction = ImeAction.Next,
@@ -236,6 +308,13 @@ private fun RequestForm(
                 state.input.description.length,
                 ServiceRequestValidator.MAX_DESCRIPTION_LENGTH,
             ),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Outlined.EditNote,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                )
+            },
             singleLine = false,
             minLines = 4,
             keyboardOptions = KeyboardOptions(
@@ -268,6 +347,7 @@ private fun LabeledTextField(
     modifier: Modifier = Modifier,
     placeholder: String? = null,
     supportingText: String? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
     prefix: @Composable (() -> Unit)? = null,
     singleLine: Boolean = true,
     minLines: Int = 1,
@@ -279,6 +359,7 @@ private fun LabeledTextField(
         modifier = modifier.fillMaxWidth(),
         label = { Text(label) },
         placeholder = placeholder?.let { { Text(it) } },
+        leadingIcon = leadingIcon,
         prefix = prefix,
         isError = errorText != null,
         supportingText = when {
@@ -295,7 +376,7 @@ private fun LabeledTextField(
         singleLine = singleLine,
         minLines = minLines,
         keyboardOptions = keyboardOptions,
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(16.dp),
     )
 }
 
@@ -323,6 +404,13 @@ private fun ServicePicker(
             modifier = Modifier.fillMaxWidth(),
             label = { Text(stringResource(R.string.request_field_service)) },
             placeholder = { Text(stringResource(R.string.request_service_picker)) },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Outlined.Build,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                )
+            },
             isError = errorText != null,
             supportingText = errorText?.let { { Text(it) } },
             trailingIcon = {
@@ -331,7 +419,7 @@ private fun ServicePicker(
                     contentDescription = stringResource(R.string.request_service_picker),
                 )
             },
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(16.dp),
         )
         // A transparent overlay over the read-only field: tapping anywhere on it opens the menu
         // without the field ever taking focus and raising the keyboard.
@@ -361,8 +449,9 @@ private fun SubmitButton(isSubmitting: Boolean, enabled: Boolean, onClick: () ->
         enabled = enabled,
         modifier = Modifier
             .fillMaxWidth()
-            .height(52.dp),
-        shape = RoundedCornerShape(14.dp),
+            .height(54.dp),
+        shape = RoundedCornerShape(16.dp),
+        elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp),
     ) {
         // Progress replaces the label in place, so the button never changes size mid-submit.
         if (isSubmitting) {
@@ -379,10 +468,20 @@ private fun SubmitButton(isSubmitting: Boolean, enabled: Boolean, onClick: () ->
                 )
             }
         } else {
-            Text(
-                text = stringResource(R.string.request_submit),
-                style = MaterialTheme.typography.titleMedium,
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    text = stringResource(R.string.request_submit),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                )
+                Icon(
+                    imageVector = Icons.AutoMirrored.Outlined.ArrowForward,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(start = 8.dp)
+                        .size(18.dp),
+                )
+            }
         }
     }
 }
