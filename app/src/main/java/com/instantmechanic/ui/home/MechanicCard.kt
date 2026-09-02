@@ -125,10 +125,20 @@ fun MechanicCard(
                     )
                 }
 
+                if (mechanic.priceRange.isNotBlank()) {
+                    Text(
+                        text = mechanic.priceRange,
+                        style = MaterialTheme.typography.labelMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(top = 3.dp),
+                    )
+                }
+
                 ServiceChipRow(
                     services = mechanic.services,
                     maxVisible = MAX_SERVICE_CHIPS,
-                    modifier = Modifier.padding(top = 8.dp),
+                    modifier = Modifier.padding(top = 6.dp),
                 )
             }
         }

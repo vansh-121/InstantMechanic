@@ -37,6 +37,7 @@ class MechanicMapper @Inject constructor(
         services = dto.services.map(ServiceType::fromApiValue).distinct(),
         isOpenNow = isOpenNow(dto),
         isVerified = dto.isVerified,
+        priceRange = dto.priceRange,
     )
 
     fun toDetail(dto: MechanicDto): MechanicDetail = MechanicDetail(

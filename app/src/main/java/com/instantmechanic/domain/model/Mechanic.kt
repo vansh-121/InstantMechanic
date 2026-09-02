@@ -21,6 +21,7 @@ data class Mechanic(
     val services: List<ServiceType>,
     val isOpenNow: Boolean,
     val isVerified: Boolean,
+    val priceRange: String = "",
 ) {
     val ratingDisplay: String get() = "%.1f".format(Locale.US, rating)
     val distanceDisplay: String get() = "%.1f km".format(Locale.US, distanceKm)

@@ -54,7 +54,7 @@
       }
     ],
     "is_verified": true,
-    "price_range": "₹₹",
+    "price_range": "Starts at ₹499",
     "about": "Family-run garage serving Kothrud since 1998. Specialists in engine diagnostics and periodic servicing for petrol and diesel hatchbacks.",
     "image_url": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80"
   },
@@ -114,7 +114,7 @@
       }
     ],
     "is_verified": true,
-    "price_range": "₹₹",
+    "price_range": "Starts at ₹399",
     "about": "Quick-turnaround workshop with same-day tyre fitting and battery replacement. Free pickup within 5 km.",
     "image_url": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80"
   },
@@ -172,7 +172,7 @@
       }
     ],
     "is_verified": false,
-    "price_range": "₹₹₹",
+    "price_range": "Starts at ₹599",
     "about": "Overnight roadside assistance and flatbed towing across east Pune. Operates from 6 PM to 6 AM, every night of the week.",
     "image_url": "https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=800&q=80"
   },
@@ -232,7 +232,7 @@
       }
     ],
     "is_verified": true,
-    "price_range": "₹₹₹",
+    "price_range": "Starts at ₹699",
     "about": "Premium multi-brand service centre with an in-house paint booth and computerised wheel alignment. Highest rated garage in central Pune.",
     "image_url": "https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&w=800&q=80"
   },
@@ -290,7 +290,7 @@
       }
     ],
     "is_verified": false,
-    "price_range": "₹",
+    "price_range": "Starts at ₹349",
     "about": "Budget-friendly neighbourhood garage known for honest diagnostics on older commercial vehicles. Closed on Fridays.",
     "image_url": "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&w=800&q=80"
   },
@@ -350,7 +350,7 @@
       }
     ],
     "is_verified": true,
-    "price_range": "₹₹",
+    "price_range": "Starts at ₹999",
     "about": "Transparent, app-tracked servicing with live job-card updates and digital invoices. Popular with first-time car owners.",
     "image_url": "https://images.unsplash.com/photo-1625047509168-a7026f36de04?auto=format&fit=crop&w=800&q=80"
   },
@@ -407,7 +407,7 @@
       }
     ],
     "is_verified": false,
-    "price_range": "₹₹",
+    "price_range": "Starts at ₹299",
     "about": "Tyre specialists stocking all major Indian and imported brands, with nitrogen filling and on-site balancing.",
     "image_url": "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=800&q=80"
   },
@@ -465,7 +465,7 @@
       }
     ],
     "is_verified": true,
-    "price_range": "₹",
+    "price_range": "Starts at ₹449",
     "about": "Fifteen-minute oil and filter changes built around the IT park commute. Open early and late, seven days a week.",
     "image_url": "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=800&q=80"
   },
@@ -523,7 +523,7 @@
       }
     ],
     "is_verified": true,
-    "price_range": "₹₹₹",
+    "price_range": "Starts at ₹799",
     "about": "Insurance-approved accident repair and full-body respray. Cashless claims handled for most major insurers.",
     "image_url": "https://images.unsplash.com/photo-1613214149922-f1809c99b414?auto=format&fit=crop&w=800&q=80"
   },
@@ -580,7 +580,7 @@
       }
     ],
     "is_verified": false,
-    "price_range": "₹₹",
+    "price_range": "Starts at ₹249",
     "about": "Air-conditioning specialists — compressor rebuilds, gas top-ups and cabin filter replacement while you wait.",
     "image_url": "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80"
   },
@@ -637,7 +637,7 @@
       }
     ],
     "is_verified": true,
-    "price_range": "₹₹₹",
+    "price_range": "Starts at ₹899",
     "about": "Ceramic coating, paint correction and interior deep-cleaning for premium cars. Appointment only; closed Mondays.",
     "image_url": "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=800&q=80"
   },
@@ -696,7 +696,7 @@
       }
     ],
     "is_verified": false,
-    "price_range": "₹",
+    "price_range": "Starts at ₹549",
     "about": "Round-the-clock breakdown support on the Mumbai-Bengaluru highway stretch. Flat tyres, jump starts and short-distance towing.",
     "image_url": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80"
   }
