@@ -10,6 +10,12 @@
 
 **Instant Mechanic** is a modern Android application built with **Jetpack Compose**, **Clean Architecture**, and **Material 3** that lets users discover nearby automotive repair garages, browse services and operating hours, call garages directly, and request vehicle repair services with real-time input validation and receipt generation.
 
+<div align="center">
+  <a href="release/app-release.apk">
+    <img src="https://img.shields.io/badge/📲_Download_Release_APK-v1.0.0-00C853?style=for-the-badge&logo=android&logoColor=white" alt="Download Release APK" />
+  </a>
+</div>
+
 ---
 
 ## 🎥 App Demo Video
@@ -154,14 +160,23 @@ The project includes **135 automated unit tests** covering validation rules, que
 ---
 
 ## 🚀 Getting Started
+ 
+### Option A: Install Pre-Compiled APK (Fastest)
+Download the standalone signed release APK directly from the repo and install it on any physical device or emulator running Android 7.0+ (API 24+):
+- 📲 **[Download app-release.apk (1.9 MB)](release/app-release.apk)**
+- Or install directly via ADB:
+  ```bash
+  adb install release/app-release.apk
+  ```
 
-### Prerequisites
+### Option B: Build From Source
+#### Prerequisites
 - **Android Studio** Hedgehog (2023.1.1) or newer / Ladybug
 - **JDK 17** (configured as Gradle JDK)
 - **Android SDK** API 35 installed
 - **Android Device / Emulator** running Android 7.0+ (API 24+)
 
-### Clone and Run
+#### Clone and Run
 ```bash
 # 1. Clone the repository
 git clone https://github.com/vansh-121/InstantMechanic.git
