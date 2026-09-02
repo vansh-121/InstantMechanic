@@ -13,11 +13,15 @@ data class MechanicQuery(
     val openNowOnly: Boolean = false,
     val sort: MechanicSort = MechanicSort.RATING,
     val page: Int = 1,
-    val pageSize: Int = 20,
+    val pageSize: Int = DEFAULT_PAGE_SIZE,
 ) {
     /** True when the user has narrowed the list in any way. */
     val hasActiveFilters: Boolean
         get() = search.isNotBlank() || service != null || openNowOnly
+
+    companion object {
+        const val DEFAULT_PAGE_SIZE = 4
+    }
 }
 
 /** Sort orders the `sort` query parameter accepts. */

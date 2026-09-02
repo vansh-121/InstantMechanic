@@ -377,5 +377,49 @@ class HomeViewModelTest {
         assertNull(viewModel.uiState.value.subtitleCount)
     }
 
+    // ------------------------------------------------------------ pagination
+
+    @Test
+    fun `loadNextPage appends items and advances current page`() = runTest {
+        val page1 = TestData.mechanics.take(1)
+        val page2 = TestData.mechanics.drop(1).take(1)
+        repository.listResponder = { query ->
+            AppResult.Success(
+                MechanicPage(
+                    items = if (query.page == 1) page1 else page2,
+                    page = query.page,
+                    totalPages = 2,
+                    totalItems = 2,
+                ),
+            )
+        }
+
+        val viewModel = createViewModel()
+        advanceUntilIdle()
+
+        assertEquals(1, (viewModel.uiState.value.content as HomeContent.Success).mechanics.size)
+        assertEquals(1, viewModel.uiState.value.currentPage)
+        assertTrue(viewModel.uiState.value.canLoadMore)
+
+        viewModel.loadNextPage()
+        advanceUntilIdle()
+
+        assertEquals(2, (viewModel.uiState.value.content as HomeContent.Success).mechanics.size)
+        assertEquals(2, viewModel.uiState.value.currentPage)
+        assertFalse(viewModel.uiState.value.canLoadMore)
+    }
+
+    @Test
+    fun `loadNextPage does nothing when canLoadMore is false`() = runTest {
+        val viewModel = createViewModel()
+        advanceUntilIdle()
+
+        val initialQueries = repository.queries.size
+        viewModel.loadNextPage()
+        advanceUntilIdle()
+
+        assertEquals(initialQueries, repository.queries.size)
+    }
+
     private fun createViewModel() = HomeViewModel(repository, controller)
 }

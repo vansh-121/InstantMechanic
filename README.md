@@ -30,7 +30,9 @@
 - **Real-Time Debounced Search**: 350 ms debounce ensures optimal typing performance without spamming requests.
 - **Service Type Filters**: Instant single-select chips (e.g. *General Service, Oil Change, Brake Repair, AC Service, Towing*).
 - **"Open Now" Toggle**: Dynamically checks whether a garage is currently open based on real-time clock evaluation.
+- **Infinite Scroll & Pagination**: Paginated fetching (page size = 4) with seamless infinite scrolling as the user reaches the bottom, along with visible page counters and completion indicators.
 - **Server-Side Sorting**: Sort garages by **Highest Rating** or **Nearest Distance**.
+- **Offline & Cache Resilience**: Bundled mock dataset, 10 MiB OkHttp disk cache, in-memory repository cache, and deterministic offline gradient image fallbacks ensuring full offline functionality.
 - **Responsive Feedback**: Shows initial full-page loading spinner on cold boot, and a slim non-blocking indicator during re-querying.
 
 ### 🏢 2. Detailed Garage Profile

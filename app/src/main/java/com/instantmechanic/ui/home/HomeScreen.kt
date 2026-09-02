@@ -29,6 +29,7 @@ import androidx.compose.material.icons.outlined.LightMode
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.SwapVert
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -43,8 +44,11 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -56,6 +60,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -86,6 +91,7 @@ fun HomeRoute(
         onSortSelected = viewModel::onSortSelected,
         onClearFilters = viewModel::onClearFilters,
         onRetry = viewModel::retry,
+        onLoadMore = viewModel::loadNextPage,
         onToggleSimulatedFailure = viewModel::onToggleSimulatedFailure,
         onMechanicClick = onMechanicClick,
         isDarkTheme = isDarkTheme,
@@ -106,6 +112,7 @@ fun HomeScreen(
     onRetry: () -> Unit,
     onToggleSimulatedFailure: () -> Unit,
     onMechanicClick: (String) -> Unit,
+    onLoadMore: () -> Unit = {},
     isDarkTheme: Boolean = false,
     onToggleTheme: () -> Unit = {},
 ) {
@@ -169,6 +176,10 @@ fun HomeScreen(
                 )
                 is HomeContent.Success -> MechanicList(
                     mechanics = content.mechanics,
+                    canLoadMore = state.canLoadMore,
+                    isLoadingMore = state.isLoadingMore,
+                    totalItems = state.totalItems,
+                    onLoadMore = onLoadMore,
                     onMechanicClick = onMechanicClick,
                 )
             }
@@ -196,10 +207,30 @@ private fun RefreshBar(visible: Boolean) {
 @Composable
 private fun MechanicList(
     mechanics: List<Mechanic>,
+    canLoadMore: Boolean,
+    isLoadingMore: Boolean,
+    totalItems: Int,
+    onLoadMore: () -> Unit,
     onMechanicClick: (String) -> Unit,
 ) {
     // Remembered by the list's identity so scroll position survives configuration changes.
     val listState = rememberLazyListState()
+
+    // Trigger loadMore automatically when scrolling near the end
+    val shouldLoadMore by remember {
+        derivedStateOf {
+            val total = listState.layoutInfo.totalItemsCount
+            val lastVisible = listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
+            total > 0 && lastVisible >= total - 2
+        }
+    }
+
+    LaunchedEffect(shouldLoadMore, canLoadMore) {
+        if (shouldLoadMore && canLoadMore) {
+            onLoadMore()
+        }
+    }
+
     LazyColumn(
         state = listState,
         modifier = Modifier.fillMaxSize(),
@@ -208,6 +239,57 @@ private fun MechanicList(
     ) {
         items(items = mechanics, key = { it.id }) { mechanic ->
             MechanicCard(mechanic = mechanic, onClick = { onMechanicClick(mechanic.id) })
+        }
+
+        if (isLoadingMore) {
+            item {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(20.dp),
+                        strokeWidth = 2.dp,
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = "Loading more garages...",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            }
+        } else if (canLoadMore) {
+            item {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    TextButton(onClick = onLoadMore) {
+                        Text(
+                            text = "Load more garages (${mechanics.size} of $totalItems)",
+                            style = MaterialTheme.typography.labelLarge,
+                        )
+                    }
+                }
+            }
+        } else if (mechanics.size >= totalItems && totalItems > 0) {
+            item {
+                Text(
+                    text = "Showing all $totalItems garages",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.outline,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 12.dp),
+                    textAlign = TextAlign.Center,
+                )
+            }
         }
     }
 }

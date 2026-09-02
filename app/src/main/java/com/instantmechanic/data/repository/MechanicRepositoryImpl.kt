@@ -52,8 +52,21 @@ class MechanicRepositoryImpl @Inject constructor(
             )
         }
 
-    override suspend fun getMechanic(id: String): AppResult<MechanicDetail> =
-        safeCall { mapper.toDetail(api.getMechanic(id)) }
+    private val detailCache = java.util.concurrent.ConcurrentHashMap<String, MechanicDetail>()
+
+    override suspend fun getMechanic(id: String): AppResult<MechanicDetail> {
+        val result = safeCall { mapper.toDetail(api.getMechanic(id)) }
+        return when (result) {
+            is AppResult.Success -> {
+                detailCache[id] = result.data
+                result
+            }
+            is AppResult.Failure -> {
+                val cached = detailCache[id]
+                if (cached != null) AppResult.Success(cached) else result
+            }
+        }
+    }
 
     override suspend fun submitServiceRequest(request: ServiceRequest): AppResult<ServiceRequestReceipt> =
         safeCall { mapper.toDomain(api.createServiceRequest(mapper.toDto(request))) }

@@ -24,11 +24,17 @@ data class HomeUiState(
      */
     val isRefreshing: Boolean = false,
     val totalItems: Int = 0,
+    val currentPage: Int = 1,
+    val totalPages: Int = 1,
+    val isLoadingMore: Boolean = false,
     /** Debug-only mirror of [com.instantmechanic.data.remote.mock.MockApiController]. */
     val simulateFailure: Boolean = false,
 ) {
     val hasActiveFilters: Boolean
         get() = searchText.isNotBlank() || selectedService != null || openNowOnly
+
+    val canLoadMore: Boolean
+        get() = currentPage < totalPages && !isLoadingMore && !isRefreshing && content is HomeContent.Success
 
     /**
      * The "N garages near you" subtitle describes the list, so it is only true while a list is

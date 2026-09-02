@@ -24,6 +24,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -56,6 +57,8 @@ class HomeViewModel @Inject constructor(
         data class Loaded(val result: AppResult<MechanicPage>) : Partial
     }
 
+    private var activeQuery = MechanicQuery()
+
     private val searchText = MutableStateFlow("")
     private val selection = MutableStateFlow(Selection())
 
@@ -77,12 +80,15 @@ class HomeViewModel @Inject constructor(
             selection,
             retryTicker,
         ) { text, current, _ ->
-            MechanicQuery(
+            val query = MechanicQuery(
                 search = text,
                 service = current.service,
                 openNowOnly = current.openNowOnly,
                 sort = current.sort,
+                page = 1,
             )
+            activeQuery = query
+            query
         }
             .flatMapLatest(::load)
             .onEach { partial -> _uiState.update { it.reduce(partial) } }
@@ -118,13 +124,46 @@ class HomeViewModel @Inject constructor(
                     HomeContent.Success(result.data.items)
                 },
                 totalItems = result.data.totalItems,
+                currentPage = result.data.page,
+                totalPages = result.data.totalPages,
+                isLoadingMore = false,
                 isRefreshing = false,
             )
 
             is AppResult.Failure -> copy(
                 content = HomeContent.Error(result.error),
+                isLoadingMore = false,
                 isRefreshing = false,
             )
+        }
+    }
+
+    fun loadNextPage() {
+        val state = _uiState.value
+        if (!state.canLoadMore) return
+
+        val nextPage = state.currentPage + 1
+        _uiState.update { it.copy(isLoadingMore = true) }
+
+        viewModelScope.launch {
+            val result = repository.getMechanics(activeQuery.copy(page = nextPage))
+            _uiState.update { current ->
+                when (result) {
+                    is AppResult.Success -> {
+                        val existing = (current.content as? HomeContent.Success)?.mechanics.orEmpty()
+                        current.copy(
+                            content = HomeContent.Success(existing + result.data.items),
+                            currentPage = result.data.page,
+                            totalPages = result.data.totalPages,
+                            totalItems = result.data.totalItems,
+                            isLoadingMore = false,
+                        )
+                    }
+                    is AppResult.Failure -> {
+                        current.copy(isLoadingMore = false)
+                    }
+                }
+            }
         }
     }
 
